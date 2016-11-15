@@ -1,0 +1,355 @@
+{
+	"groups": [
+		{
+			"keys": "d4_png,d5_png,d6_png,l1_png,l2_png,l3_png,l4_png,l5_png,l6_png,r1_png,r2_png,r3_png,r4_png,r5_png,r6_png,u1_png,u2_png,u3_png,u4_png,u5_png,u6_png,d1_png,d2_png,d3_png,grass_png,ground_jpg,water_png,wall_png,n1d1_png,n1d2_png,n1d3_png,n1d4_png,n1l1_png,n1l2_png,n1l3_png,n1l4_png,n1r1_png,n1r2_png,n1r3_png,n1r4_png,n1u1_png,n1u2_png,n1u3_png,n1u4_png,n2d1_png,n2d2_png,n2d3_png,n2d4_png,n2l1_png,n2l2_png,n2l3_png,n2l4_png,n2r1_png,n2r2_png,n2r3_png,n2r4_png,n2u1_png,n2u2_png,n2u3_png,n2u4_png,missionblank_exit_png,missionblank_png,mission_finish_png,mission_acceptable_png,mission_ongoing_png,task_panel_png,task_move_png,button_accept_png,button_finish_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/d4.png",
+			"type": "image",
+			"name": "d4_png"
+		},
+		{
+			"url": "assets/d5.png",
+			"type": "image",
+			"name": "d5_png"
+		},
+		{
+			"url": "assets/d6.png",
+			"type": "image",
+			"name": "d6_png"
+		},
+		{
+			"url": "assets/l1.png",
+			"type": "image",
+			"name": "l1_png"
+		},
+		{
+			"url": "assets/l2.png",
+			"type": "image",
+			"name": "l2_png"
+		},
+		{
+			"url": "assets/l3.png",
+			"type": "image",
+			"name": "l3_png"
+		},
+		{
+			"url": "assets/l4.png",
+			"type": "image",
+			"name": "l4_png"
+		},
+		{
+			"url": "assets/l5.png",
+			"type": "image",
+			"name": "l5_png"
+		},
+		{
+			"url": "assets/l6.png",
+			"type": "image",
+			"name": "l6_png"
+		},
+		{
+			"url": "assets/r1.png",
+			"type": "image",
+			"name": "r1_png"
+		},
+		{
+			"url": "assets/r2.png",
+			"type": "image",
+			"name": "r2_png"
+		},
+		{
+			"url": "assets/r3.png",
+			"type": "image",
+			"name": "r3_png"
+		},
+		{
+			"url": "assets/r4.png",
+			"type": "image",
+			"name": "r4_png"
+		},
+		{
+			"url": "assets/r5.png",
+			"type": "image",
+			"name": "r5_png"
+		},
+		{
+			"url": "assets/r6.png",
+			"type": "image",
+			"name": "r6_png"
+		},
+		{
+			"url": "assets/u1.png",
+			"type": "image",
+			"name": "u1_png"
+		},
+		{
+			"url": "assets/u2.png",
+			"type": "image",
+			"name": "u2_png"
+		},
+		{
+			"url": "assets/u3.png",
+			"type": "image",
+			"name": "u3_png"
+		},
+		{
+			"url": "assets/u4.png",
+			"type": "image",
+			"name": "u4_png"
+		},
+		{
+			"url": "assets/u5.png",
+			"type": "image",
+			"name": "u5_png"
+		},
+		{
+			"url": "assets/u6.png",
+			"type": "image",
+			"name": "u6_png"
+		},
+		{
+			"url": "assets/d1.png",
+			"type": "image",
+			"name": "d1_png"
+		},
+		{
+			"url": "assets/d2.png",
+			"type": "image",
+			"name": "d2_png"
+		},
+		{
+			"url": "assets/d3.png",
+			"type": "image",
+			"name": "d3_png"
+		},
+		{
+			"url": "assets/grass.png",
+			"type": "image",
+			"name": "grass_png"
+		},
+		{
+			"url": "assets/ground.jpg",
+			"type": "image",
+			"name": "ground_jpg"
+		},
+		{
+			"url": "assets/water.png",
+			"type": "image",
+			"name": "water_png"
+		},
+		{
+			"url": "assets/wall.png",
+			"type": "image",
+			"name": "wall_png"
+		},
+		{
+			"name": "n1d1_png",
+			"type": "image",
+			"url": "assets/n1d1.png"
+		},
+		{
+			"name": "n1d2_png",
+			"type": "image",
+			"url": "assets/n1d2.png"
+		},
+		{
+			"name": "n1d3_png",
+			"type": "image",
+			"url": "assets/n1d3.png"
+		},
+		{
+			"name": "n1d4_png",
+			"type": "image",
+			"url": "assets/n1d4.png"
+		},
+		{
+			"name": "n1l1_png",
+			"type": "image",
+			"url": "assets/n1l1.png"
+		},
+		{
+			"name": "n1l2_png",
+			"type": "image",
+			"url": "assets/n1l2.png"
+		},
+		{
+			"name": "n1l3_png",
+			"type": "image",
+			"url": "assets/n1l3.png"
+		},
+		{
+			"name": "n1l4_png",
+			"type": "image",
+			"url": "assets/n1l4.png"
+		},
+		{
+			"name": "n1r1_png",
+			"type": "image",
+			"url": "assets/n1r1.png"
+		},
+		{
+			"name": "n1r2_png",
+			"type": "image",
+			"url": "assets/n1r2.png"
+		},
+		{
+			"name": "n1r3_png",
+			"type": "image",
+			"url": "assets/n1r3.png"
+		},
+		{
+			"name": "n1r4_png",
+			"type": "image",
+			"url": "assets/n1r4.png"
+		},
+		{
+			"name": "n1u1_png",
+			"type": "image",
+			"url": "assets/n1u1.png"
+		},
+		{
+			"name": "n1u2_png",
+			"type": "image",
+			"url": "assets/n1u2.png"
+		},
+		{
+			"name": "n1u3_png",
+			"type": "image",
+			"url": "assets/n1u3.png"
+		},
+		{
+			"name": "n1u4_png",
+			"type": "image",
+			"url": "assets/n1u4.png"
+		},
+		{
+			"name": "n2d1_png",
+			"type": "image",
+			"url": "assets/n2d1.png"
+		},
+		{
+			"name": "n2d2_png",
+			"type": "image",
+			"url": "assets/n2d2.png"
+		},
+		{
+			"name": "n2d3_png",
+			"type": "image",
+			"url": "assets/n2d3.png"
+		},
+		{
+			"name": "n2d4_png",
+			"type": "image",
+			"url": "assets/n2d4.png"
+		},
+		{
+			"name": "n2l1_png",
+			"type": "image",
+			"url": "assets/n2l1.png"
+		},
+		{
+			"name": "n2l2_png",
+			"type": "image",
+			"url": "assets/n2l2.png"
+		},
+		{
+			"name": "n2l3_png",
+			"type": "image",
+			"url": "assets/n2l3.png"
+		},
+		{
+			"name": "n2l4_png",
+			"type": "image",
+			"url": "assets/n2l4.png"
+		},
+		{
+			"name": "n2r1_png",
+			"type": "image",
+			"url": "assets/n2r1.png"
+		},
+		{
+			"name": "n2r2_png",
+			"type": "image",
+			"url": "assets/n2r2.png"
+		},
+		{
+			"name": "n2r3_png",
+			"type": "image",
+			"url": "assets/n2r3.png"
+		},
+		{
+			"name": "n2r4_png",
+			"type": "image",
+			"url": "assets/n2r4.png"
+		},
+		{
+			"name": "n2u1_png",
+			"type": "image",
+			"url": "assets/n2u1.png"
+		},
+		{
+			"name": "n2u2_png",
+			"type": "image",
+			"url": "assets/n2u2.png"
+		},
+		{
+			"name": "n2u3_png",
+			"type": "image",
+			"url": "assets/n2u3.png"
+		},
+		{
+			"name": "n2u4_png",
+			"type": "image",
+			"url": "assets/n2u4.png"
+		},
+		{
+			"name": "missionblank_exit_png",
+			"type": "image",
+			"url": "assets/missionblank_exit.png"
+		},
+		{
+			"name": "missionblank_png",
+			"type": "image",
+			"url": "assets/missionblank.png"
+		},
+		{
+			"name": "mission_finish_png",
+			"type": "image",
+			"url": "assets/mission_finish.png"
+		},
+		{
+			"name": "mission_acceptable_png",
+			"type": "image",
+			"url": "assets/mission_acceptable.png"
+		},
+		{
+			"name": "mission_ongoing_png",
+			"type": "image",
+			"url": "assets/mission_ongoing.png"
+		},
+		{
+			"name": "task_panel_png",
+			"type": "image",
+			"url": "assets/task_panel.png"
+		},
+		{
+			"name": "task_move_png",
+			"type": "image",
+			"url": "assets/task_move.png"
+		},
+		{
+			"name": "button_accept_png",
+			"type": "image",
+			"url": "assets/button_accept.png"
+		},
+		{
+			"name": "button_finish_png",
+			"type": "image",
+			"url": "assets/button_finish.png"
+		}
+	]
+}
