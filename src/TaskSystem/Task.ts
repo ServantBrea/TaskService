@@ -15,8 +15,4 @@ class Task {
         this.toNpcId = str[4];
         this.status = sta;    
     }
-
-    accept() {
-        
-    }
 }
