@@ -1,9 +1,12 @@
 var Npc = (function () {
+    //构造
     function Npc(id, png) {
         this.animate = new egret.DisplayObjectContainer();
         this.animateBitmap = new egret.Bitmap();
         this.emoji = new egret.Bitmap();
-        this.taskTalk = new TalkPanel();
+        /*private*/ this.taskTalk = new TalkPanel();
+        this.taskRelate = new Array();
+        this.ownTasks = new Array();
         //npc动画    
         this.animationMode = 0;
         this.animateFrame = 250;
@@ -13,19 +16,47 @@ var Npc = (function () {
         this.getMoveDown();
         this.animate.addChild(this.emoji);
         this.animate.touchEnabled = true;
+        this.taskTalk.ownNpc = this;
     }
     var d = __define,c=Npc,p=c.prototype;
+    //根据相关任务状态改变而改变
     p.onChange = function (task) {
-        this.changeTaskStatus(task.status);
-        this.taskTalk.setTaskIn(task, this.taskDo);
+        for (var i = 0; i < this.ownTasks.length; i++) {
+            if (task.id == this.ownTasks[i].id) {
+                this.changeTaskStatus(task.status, i);
+                this.taskTalk.setTaskIn(task, this.taskRelate[i]);
+            }
+        }
     };
-    p.changeTaskStatus = function (str) {
+    //给NPC绑定相关TaskService（唯一？）
+    p.setTaskService = function (taskService) {
+        this.taskService = taskService;
+    };
+    //给NPC绑定相关任务
+    p.addTask = function (task) {
+        var sta;
+        if (task.fromNpcId == this.id) {
+            if (task.toNpcId == this.id) {
+                sta = TaskRelate.BOTH;
+            }
+            else {
+                sta = TaskRelate.PROMULGATOR;
+            }
+        }
+        if (task.toNpcId == this.id && task.fromNpcId != this.id) {
+            sta = TaskRelate.DELIVERYMAN;
+        }
+        this.ownTasks.push(task);
+        this.taskRelate.push(sta);
+    };
+    //任务状态符号
+    p.changeTaskStatus = function (str, i) {
         switch (str) {
             case TaskStatus.UNACCEPTABLE:
                 this.taskUnacceptable();
                 break;
             case TaskStatus.ACCEPTABLE:
-                if (this.taskDo == "from") {
+                if (this.taskRelate[i] == 0 || this.taskRelate[i] == 2) {
                     this.taskAcceptable();
                 }
                 break;
@@ -34,7 +65,7 @@ var Npc = (function () {
                 break;
             case TaskStatus.CAN_SUBMIT:
                 this.noEmoji();
-                if (this.taskDo == "to") {
+                if (this.taskRelate[i] == 1 || this.taskRelate[i] == 2) {
                     this.taskCanSubmit();
                 }
                 break;

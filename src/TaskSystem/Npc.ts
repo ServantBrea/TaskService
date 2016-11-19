@@ -1,39 +1,74 @@
 class Npc implements Observer {
   
     animate = new egret.DisplayObjectContainer();
-    animateBitmap = new egret.Bitmap();
-    emoji = new egret.Bitmap();
-    taskTalk = new TalkPanel();
-    
-    taskDo:string; 
-    id: string;
-    png: string[];
+    private animateBitmap = new egret.Bitmap();
+    private emoji = new egret.Bitmap();
 
+    /*private*/id: string;
+    private png: string[];
+
+    /*private*/taskService:TaskService;
+    /*private*/taskTalk = new TalkPanel();
+    
+    private taskRelate:TaskRelate[] = new Array();
+    private ownTasks:Task[] = new Array(); 
+    
+//构造
     constructor(id:string,png: string[]) {
         this.id = id;
         this.png = png;
+
         this.animate.addChild(this.animateBitmap)
         this.getMoveDown();
         this.animate.addChild(this.emoji);
         this.animate.touchEnabled = true;
+        
+        this.taskTalk.ownNpc = this;
     }
 
+//根据相关任务状态改变而改变
     onChange(task: Task) {
-        this.changeTaskStatus(task.status);
-        this.taskTalk.setTaskIn(task,this.taskDo);
+        for(var i = 0;i < this.ownTasks.length;i++) {
+            if(task.id == this.ownTasks[i].id) {
+                this.changeTaskStatus(task.status,i);
+                this.taskTalk.setTaskIn(task,this.taskRelate[i]);
+            }
+        }
+    }
+//给NPC绑定相关TaskService（唯一？）
+    setTaskService(taskService:TaskService) {
+        this.taskService = taskService;
     }
 
-    private changeTaskStatus(str:TaskStatus) {
+//给NPC绑定相关任务
+    addTask(task:Task) {
+        var sta;
+        if(task.fromNpcId == this.id) {
+            if(task.toNpcId == this.id) {
+                sta = TaskRelate.BOTH;
+            }else {
+                sta = TaskRelate.PROMULGATOR; 
+            }
+        }
+        if(task.toNpcId == this.id && task.fromNpcId != this.id) {
+            sta = TaskRelate.DELIVERYMAN;
+        }
+        this.ownTasks.push(task);
+        this.taskRelate.push(sta);
+    }
+
+//任务状态符号
+    private changeTaskStatus(str:TaskStatus,i:number) {
         switch (str) {
             case TaskStatus.UNACCEPTABLE: this.taskUnacceptable(); break;
             case TaskStatus.ACCEPTABLE: 
-                 if(this.taskDo == "from") {
+                 if(this.taskRelate[i] == 0 || this.taskRelate[i] == 2) {
                      this.taskAcceptable(); 
                  }break;
             case TaskStatus.DURING: this.taskDuring(); break;
             case TaskStatus.CAN_SUBMIT: 
                  this.noEmoji();
-                 if(this.taskDo == "to") {
+                 if(this.taskRelate[i] == 1 || this.taskRelate[i] == 2) {
                      this.taskCanSubmit(); 
                  }break;
             case TaskStatus.SUBMITED: this.taskSubmited(); break;

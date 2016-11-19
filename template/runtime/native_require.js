@@ -9,12 +9,14 @@ var game_file_list = [
 	"libs/modules/res/res.js",
 	"libs/modules/tween/tween.js",
 	"bin-debug/Characters/Characters.js",
-	"bin-debug/Event.js",
+	"bin-debug/Characters/KillMosterDemo.js",
 	"bin-debug/FindPath/Astar.js",
 	"bin-debug/FindPath/Grid.js",
 	"bin-debug/FindPath/Map.js",
 	"bin-debug/FindPath/Node.js",
 	"bin-debug/Main.js",
+	"bin-debug/Other/enum.js",
+	"bin-debug/Other/Event.js",
 	"bin-debug/Other/LoadingUI.js",
 	"bin-debug/TaskSystem/Npc.js",
 	"bin-debug/TaskSystem/Observer.js",
@@ -22,7 +24,6 @@ var game_file_list = [
 	"bin-debug/TaskSystem/Task.js",
 	"bin-debug/TaskSystem/TaskPanel.js",
 	"bin-debug/TaskSystem/TaskService.js",
-	"bin-debug/TaskSystem/TaskStatus.js",
 	//----auto game_file_list end----
 ];
 

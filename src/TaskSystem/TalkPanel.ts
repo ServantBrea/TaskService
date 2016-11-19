@@ -1,16 +1,18 @@
 class TalkPanel extends egret.DisplayObjectContainer {
-
+    
+    ownNpc:Npc;
     private panelBitmap = this.createBitmapByName("missionblank_png");
     private exit = this.createBitmapByName("missionblank_exit_png");
-    private taskText = this.createText(60,40,25);
+    private taskName = this.createText(60,40,25);
+    private taskDesc = this.createText(60,70,25);
     private taskButton:egret.Bitmap = new egret.Bitmap();
 
     public constructor() {
         super();
-        this.createMissionBlank();
+        this.createtaskBlank();
     }
 
-    private createMissionBlank() {
+    private createtaskBlank() {
         this.addChild(this.panelBitmap);
 
         this.exit.x = 447;
@@ -20,22 +22,30 @@ class TalkPanel extends egret.DisplayObjectContainer {
 
         this.addChild(this.taskButton);
         
-        this.taskText.width = 350;
-        this.taskText.touchEnabled = true;
-        this.addChild(this.taskText);
+        this.taskName.width = 350;
+        this.addChild(this.taskName);
+        this.taskDesc.width = 350;
+        this.addChild(this.taskDesc);
     }
 
-    setTaskIn(task:Task,str:string) {
-        this.taskText.text = task.name + "  " + task.desc;
+    setTaskIn(task:Task,str:TaskRelate) {
+        this.taskName.text = task.name;
+        this.taskDesc.text = task.desc
         this.removeChild(this.taskButton);
-        if(str == "from" && task.status == TaskStatus.ACCEPTABLE) {
+        if((str == 0 || str == 2) && task.status == 1) {
             this.taskButton = this.createBitmapByName("button_accept_png");
             this.addChild(this.taskButton);
-            this.taskButton.addEventListener( egret.TouchEvent.TOUCH_TAP,this.taskAccept,this);
-        }else if(str == "to" && task.status == TaskStatus.CAN_SUBMIT) {
+            this.taskButton.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=> {
+                this.ownNpc.taskService.accept(task.id);
+                this.moveDown();
+            },this);
+        }else if((str == 1 || str == 2) && task.status == 3) {
             this.taskButton = this.createBitmapByName("button_finish_png");
             this.addChild(this.taskButton);
-            this.taskButton.addEventListener( egret.TouchEvent.TOUCH_TAP,this.taskFinish,this);
+            this.taskButton.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=> {
+                this.ownNpc.taskService.finish(task.id);
+                this.moveDown();
+            },this);
         }else {
             this.taskButton = new egret.Bitmap();
             this.addChild(this.taskButton);
@@ -46,16 +56,6 @@ class TalkPanel extends egret.DisplayObjectContainer {
         this.addChild(this.taskButton);
     }
 
-    private taskAccept() {
-        var acc: taskAccept = new taskAccept(taskAccept.accept);
-        this.dispatchEvent(acc);
-    }
-
-    private taskFinish() {
-        var fin: taskFinish = new taskFinish(taskFinish.finish);
-        this.dispatchEvent(fin);
-    }
- 
     moveUp() {
         egret.Tween.get(this).to({y:800},500,egret.Ease.sineIn);
     }

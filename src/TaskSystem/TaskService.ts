@@ -1,80 +1,83 @@
 class TaskService {
-    
-	task001 = ["001","Ghost's Talking","You need to talk to the ghost!","npc_0","npc_1"]
 
-    npcPng001 = [
-		"n1u1_png", "n1u2_png", "n1u3_png", "n1u4_png",
-        "n1d1_png", "n1d2_png", "n1d3_png", "n1d4_png",
-        "n1l1_png", "n1l2_png", "n1l3_png", "n1l4_png",
-        "n1r1_png", "n1r2_png", "n1r3_png", "n1r4_png",];
-    npcPng002 = [
-		"n2u1_png", "n2u2_png", "n2u3_png", "n2u4_png",
-        "n2d1_png", "n2d2_png", "n2d3_png", "n2d4_png",
-        "n2l1_png", "n2l2_png", "n2l3_png", "n2l4_png",
-        "n2r1_png", "n2r2_png", "n2r3_png", "n2r4_png",];
-    
-	npcList:Npc[] = new Array();
-	taskPanel = new TaskPanel();
-    private observerList:Observer[] = new Array();
-	private taskList:Task[] = new Array();;
+	task001 = ["talk","001", "Ghost's Talking", "You need to talk to the ghost!", "npc_0", "npc_1","002",""]
+	task002 = ["kill","002", "Killing Monsters", "You need to kill 10 monsters!", "npc_1", "npc_1","","10"]
+
+	npcList: Npc[] = new Array();
+	/*private*/taskPanel = new TaskPanel();
+    private observerList: Observer[] = new Array();
+	private taskList: Task[] = new Array();;
 
 	constructor() {
-        var npc_0 = new Npc("npc_0",this.npcPng001);
-		var npc_1 = new Npc("npc_1",this.npcPng002);
-        
-		this.npcList.push(npc_0);
-		this.npcList.push(npc_1);
-		
-		this.observerList.push(npc_0);
-		this.observerList.push(npc_1);
 		this.observerList.push(this.taskPanel);
-		
-        this.taskList.push(new Task(this.task001,TaskStatus.ACCEPTABLE));
-		
-        for(var i = 0;i < this.taskList.length;i++) {
-			for(var j = 0;j < this.npcList.length;j++) {
-	            if(this.taskList[i].fromNpcId == this.npcList[j].id) {
-					this.npcList[j].taskDo = "from";
+		this.addTasks(this.task001, TaskStatus.ACCEPTABLE);
+		this.addTasks(this.task002, TaskStatus.UNACCEPTABLE);
+	}
+
+	finish(id: string) {
+        for (var i = 0; i < this.taskList.length; i++) {
+			if (this.taskList[i].id == id) {
+				this.taskList[i].status = TaskStatus.SUBMITED;
+				for(var j = 0; j < this.taskList.length; j++) {
+					if(this.taskList[j].id == this.taskList[i].nextTaskId) {
+						this.taskList[j].status = TaskStatus.ACCEPTABLE;
+					}
 				}
-				if(this.taskList[i].toNpcId == this.npcList[j].id) {
-					this.npcList[j].taskDo = "to";
+				this.notify();
+			}
+		}
+	}
+
+	accept(id: string) {
+        for (var i = 0; i < this.taskList.length; i++) {
+			if (this.taskList[i].id == id) {
+				if(this.taskList[i].tasktype == "talk"){
+				    this.taskList[i].status = TaskStatus.CAN_SUBMIT;
+				}else {
+					this.taskList[i].status = TaskStatus.DURING;
+				}
+				this.notify();
+			}
+		}
+	}
+    
+	addTasks(str:string[],sta:TaskStatus) {
+		var task = new Task(str, sta);
+		this.taskList.push(task);
+		task.taskService = this;
+	}
+
+	getTasks(id:string):Task {
+		for (var i = 0; i < this.taskList.length; i++) {
+            if (id == this.taskList[i].id) {
+				return this.taskList[i];
+			}
+		}
+	}
+
+	addNpc(npc: Npc) {
+		npc.setTaskService(this);
+        this.npcList.push(npc);
+		this.observerList.push(npc);
+		for (var i = 0; i < this.taskList.length; i++) {
+			for (var j = 0; j < this.npcList.length; j++) {
+				if (this.taskList[i].fromNpcId == this.npcList[j].id) {
+					this.npcList[j].addTask(this.taskList[i]);
+				}
+				if (this.taskList[i].toNpcId == this.npcList[j].id) {
+					this.npcList[j].addTask(this.taskList[i]);
 				}
 			}
 		}
 		this.notify();
-
-		this.npcList[0].taskTalk.addEventListener(taskAccept.accept, this.accept, this);
-		this.npcList[1].taskTalk.addEventListener(taskFinish.finish, this.finish, this);	
 	}
 
-	finish(id:string) {
-		var id = "001";
-        for(var i = 0;i < this.taskList.length;i++) {
-			if(this.taskList[i].id == id) {
-				this.taskList[i].status = TaskStatus.SUBMITED;
-				this.notify();
-			}
-		}
-	}
-
-	accept(id:string) {
-		var id = "001";
-        for(var i = 0;i < this.taskList.length;i++) {
-			if(this.taskList[i].id == id) {
-				this.taskList[i].status = TaskStatus.CAN_SUBMIT;
-				this.notify();
-			}
-		}
-	}
-
-	getTaskByCustomRole(rulesFunction):Task {
-        return ;
-	}
-
-	private notify() {
-		for(var i = 0;i < this.taskList.length;i++) {
-			for(var j = 0;j < this.observerList.length;j++) {
-				this.observerList[j].onChange(this.taskList[i]);
+	notify() {
+		for (var i = 0; i < this.taskList.length; i++) {
+			if (this.taskList[i].status != TaskStatus.UNACCEPTABLE) {
+				for (var j = 0; j < this.observerList.length; j++) {
+					this.observerList[j].onChange(this.taskList[i]);
+				}
 			}
 		}
 	}

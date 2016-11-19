@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "d4_png,d5_png,d6_png,l1_png,l2_png,l3_png,l4_png,l5_png,l6_png,r1_png,r2_png,r3_png,r4_png,r5_png,r6_png,u1_png,u2_png,u3_png,u4_png,u5_png,u6_png,d1_png,d2_png,d3_png,grass_png,ground_jpg,water_png,wall_png,n1d1_png,n1d2_png,n1d3_png,n1d4_png,n1l1_png,n1l2_png,n1l3_png,n1l4_png,n1r1_png,n1r2_png,n1r3_png,n1r4_png,n1u1_png,n1u2_png,n1u3_png,n1u4_png,n2d1_png,n2d2_png,n2d3_png,n2d4_png,n2l1_png,n2l2_png,n2l3_png,n2l4_png,n2r1_png,n2r2_png,n2r3_png,n2r4_png,n2u1_png,n2u2_png,n2u3_png,n2u4_png,missionblank_exit_png,missionblank_png,mission_finish_png,mission_acceptable_png,mission_ongoing_png,task_panel_png,task_move_png,button_accept_png,button_finish_png",
+			"keys": "d4_png,d5_png,d6_png,l1_png,l2_png,l3_png,l4_png,l5_png,l6_png,r1_png,r2_png,r3_png,r4_png,r5_png,r6_png,u1_png,u2_png,u3_png,u4_png,u5_png,u6_png,d1_png,d2_png,d3_png,grass_png,ground_jpg,water_png,wall_png,n1d1_png,n1d2_png,n1d3_png,n1d4_png,n1l1_png,n1l2_png,n1l3_png,n1l4_png,n1r1_png,n1r2_png,n1r3_png,n1r4_png,n1u1_png,n1u2_png,n1u3_png,n1u4_png,n2d1_png,n2d2_png,n2d3_png,n2d4_png,n2l1_png,n2l2_png,n2l3_png,n2l4_png,n2r1_png,n2r2_png,n2r3_png,n2r4_png,n2u1_png,n2u2_png,n2u3_png,n2u4_png,missionblank_exit_png,missionblank_png,mission_finish_png,mission_acceptable_png,mission_ongoing_png,task_panel_png,task_move_png,button_accept_png,button_finish_png,killmonster_png",
 			"name": "preload"
 		}
 	],
@@ -350,6 +350,11 @@
 			"name": "button_finish_png",
 			"type": "image",
 			"url": "assets/button_finish.png"
+		},
+		{
+			"name": "killmonster_png",
+			"type": "image",
+			"url": "assets/killmonster.png"
 		}
 	]
 }

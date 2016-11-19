@@ -28,6 +28,16 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 class Main extends egret.DisplayObjectContainer {
+    npcPng001 = [
+		"n1u1_png", "n1u2_png", "n1u3_png", "n1u4_png",
+        "n1d1_png", "n1d2_png", "n1d3_png", "n1d4_png",
+        "n1l1_png", "n1l2_png", "n1l3_png", "n1l4_png",
+        "n1r1_png", "n1r2_png", "n1r3_png", "n1r4_png",];
+    npcPng002 = [
+		"n2u1_png", "n2u2_png", "n2u3_png", "n2u4_png",
+        "n2d1_png", "n2d2_png", "n2d3_png", "n2d4_png",
+        "n2l1_png", "n2l2_png", "n2l3_png", "n2l4_png",
+        "n2r1_png", "n2r2_png", "n2r3_png", "n2r4_png",];
 
 //前面部分    
     //加载进度界面
@@ -93,47 +103,57 @@ class Main extends egret.DisplayObjectContainer {
 // 创建游戏场景
     private createGameScene() {
         var map: CreateMap = new CreateMap();
+
+        var kill:KillMosterDemo = new KillMosterDemo();
+        kill.y = 13 * map.getGridY();
         
         var Character = new Player();
         Character.animate.x = map.getGridX();
         Character.animate.y = map.getGridY();
 
-        var task:TaskService = new TaskService();
+        var taskService:TaskService = new TaskService();
+        var npc_0 = new Npc("npc_0",this.npcPng001);
+		var npc_1 = new Npc("npc_1",this.npcPng002);
+        kill.setTask(taskService.getTasks(kill.taskId));
 
-        task.npcList[0].animate.x = 8 * map.getGridX();
-        task.npcList[0].animate.y = 11 * map.getGridY();
-        task.npcList[0].taskTalk.x = 80;
-        task.npcList[0].taskTalk.y = 1136;
+        taskService.addNpc(npc_0);
+        taskService.addNpc(npc_1);
 
-        task.npcList[1].animate.x = 5 * map.getGridX();
-        task.npcList[1].animate.y = 5 * map.getGridY();
-        task.npcList[1].taskTalk.x = 80;
-        task.npcList[1].taskTalk.y = 1136;
+        taskService.npcList[0].animate.x = 8 * map.getGridX();
+        taskService.npcList[0].animate.y = 11 * map.getGridY();
+        taskService.npcList[0].taskTalk.x = 80;
+        taskService.npcList[0].taskTalk.y = 1136;
 
-        task.taskPanel.panel.x = 460;
+        taskService.npcList[1].animate.x = 5 * map.getGridX();
+        taskService.npcList[1].animate.y = 5 * map.getGridY();
+        taskService.npcList[1].taskTalk.x = 80;
+        taskService.npcList[1].taskTalk.y = 1136;
+
+        taskService.taskPanel.panel.x = 460;
 
         this.addChild(map);
+        
         this.addChild(Character.animate);
-        this.addChild(task.npcList[0].animate);
-        this.addChild(task.npcList[0].taskTalk);
-        this.addChild(task.npcList[1].animate);
-        this.addChild(task.npcList[1].taskTalk);
-        this.addChild(task.taskPanel.panel);       
+        this.addChild(kill); 
+        this.addChild(taskService.npcList[0].animate);
+        this.addChild(taskService.npcList[0].taskTalk);
+        this.addChild(taskService.npcList[1].animate);
+        this.addChild(taskService.npcList[1].taskTalk);
+        this.addChild(taskService.taskPanel.panel);          
 
 //点击NPC事件
-
-        task.npcList[0].animate.addEventListener(egret.TouchEvent.TOUCH_TAP, npc1Reaction, this);
-        task.npcList[1].animate.addEventListener(egret.TouchEvent.TOUCH_TAP, npc2Reaction, this);
+        taskService.npcList[0].animate.addEventListener(egret.TouchEvent.TOUCH_TAP, npc1Reaction, this);
+        taskService.npcList[1].animate.addEventListener(egret.TouchEvent.TOUCH_TAP, npc2Reaction, this);
 
         function npc1Reaction() {
             Character.turnOver(
-                task.npcList[0].onNpcClick(Character.animate.x, Character.animate.y, map.getGridX(), map.getGridY())
+                taskService.npcList[0].onNpcClick(Character.animate.x, Character.animate.y, map.getGridX(), map.getGridY())
             );
         }
 
         function npc2Reaction() {
             Character.turnOver(
-                task.npcList[1].onNpcClick(Character.animate.x, Character.animate.y, map.getGridX(), map.getGridY())
+                taskService.npcList[1].onNpcClick(Character.animate.x, Character.animate.y, map.getGridX(), map.getGridY())
             );
         }
         

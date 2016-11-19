@@ -1,6 +1,6 @@
 class AStar extends egret.Sprite {
 
-//声明构造	
+	//声明构造	
 	private openList: Pnode[];//开放列表
 	private closedList: Pnode[];//封闭列表
 	private grid: Grid;//所要计算的网格
@@ -30,7 +30,7 @@ class AStar extends egret.Sprite {
 		return this.searchPath();
 	}//对指定的网络寻找路径
 
-//A星算法	
+	//A星算法	
 	private searchPath(): Boolean {
 		var t = 1;
 		var node: Pnode = this.startPNode;
@@ -41,7 +41,7 @@ class AStar extends egret.Sprite {
 			var endX = Math.min(this.grid.getNumCols() - 1, node.x + 1);
 			var startY = Math.max(0, node.y - 1);
 			var endY = Math.min(this.grid.getNumRows() - 1, node.y + 1);
-            //循环处理所有相邻节点
+			//循环处理所有相邻节点
 			for (var i = startX; i <= endX; i++) {
 				for (var j = startY; j <= endY; j++) {
 					var test = this.grid.getPnode(i, j);
@@ -81,22 +81,24 @@ class AStar extends egret.Sprite {
 						test.parent = node;
 						this.openList.push(test);
 					}
-                }
+				}
 			}
+
 			//把处理过的本轮中心节点加入close节点               
 			this.closedList.push(node);
 			//按总代价从小到大排序
 			this.sortStoB(this.openList);
 			//从open数组中删除代价最小的结节，同时把该节点赋值为node，做为下次的中心点
 			node = this.openList.shift() as Pnode;
-            t++;
+			t++;
 		}
 		//循环结束后，构建路径		
 		this.buildPath();
+
 		return true;
 	}//计算周围节点代价的关键处理函数
 
-//其他函数 
+	//其他函数 
     getPath(): Pnode[] {
 		return this.path;
 	}//获得路径
@@ -157,7 +159,7 @@ class AStar extends egret.Sprite {
 		return Math.abs(node.x - this.endPNode.x) * this.straightCost + Math.abs(node.y - this.endPNode.y) * this.straightCost;
 	}//曼哈顿估价法
 
-//部分调试函数//未用
+	//部分调试函数//未用
 	/*	
 	private getvisited():_Node[] {
 	    return this._closed.concat(this._open);
@@ -172,7 +174,7 @@ class AStar extends egret.Sprite {
 	}//返回close数组
     */
 
-//其他估价法//未用	
+	//其他估价法//未用	
 	/*  
 	//几何估价法
 	private euclidian(node:_Node):number {

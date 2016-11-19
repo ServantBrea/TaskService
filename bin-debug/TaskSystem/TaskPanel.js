@@ -5,6 +5,7 @@ var TaskPanel = (function () {
         this.button = this.createBitmapByName("task_move_png");
         this.textField = this.createText(20, 20, 20);
         this.taskStatus = this.createText(20, 20, 20);
+        this.taskTargetNumber = this.createText(20, 20, 20);
         this.button_use = true;
         this.panel.addChild(this.panelBitmap);
         this.button.x = -20;
@@ -18,29 +19,40 @@ var TaskPanel = (function () {
         this.taskStatus.y = 50;
         this.taskStatus.textColor = 0x00ff00;
         this.panel.addChild(this.taskStatus);
+        this.taskTargetNumber.width = 350;
+        this.taskTargetNumber.y = 70;
+        this.panel.addChild(this.taskTargetNumber);
     }
     var d = __define,c=TaskPanel,p=c.prototype;
     p.onChange = function (task) {
-        this.textField.text = task.name;
-        var text;
-        switch (task.status) {
-            case 0:
-                text = "Unacceptable";
-                break;
-            case 1:
-                text = "Acceptable";
-                break;
-            case 2:
-                text = "During";
-                break;
-            case 3:
-                text = "Can Submit";
-                break;
-            case 4:
-                text = "Submited";
-                break;
+        if (task.status != TaskStatus.UNACCEPTABLE) {
+            this.textField.text = task.name;
+            var text;
+            switch (task.status) {
+                case 0:
+                    text = "Unacceptable";
+                    break;
+                case 1:
+                    text = "Acceptable";
+                    break;
+                case 2:
+                    text = "During";
+                    if (task.tasktype == "kill") {
+                        this.taskTargetNumber.text = task.taskOngoing(false);
+                    }
+                    break;
+                case 3:
+                    text = "Can Submit";
+                    if (task.tasktype == "kill") {
+                        this.taskTargetNumber.text = task.taskOngoing(false);
+                    }
+                    break;
+                case 4:
+                    text = "Submited";
+                    break;
+            }
+            this.taskStatus.text = text;
         }
-        this.taskStatus.text = text;
     };
     p.onButtonClick = function () {
         var _this = this;
